@@ -13,6 +13,10 @@ PASSWORD = "illusive348"
 
 # regex for finding text in html source page
 
+PATTERN_HEADLINE_TEXT = re.compile(r"(?<=\"headline\">)[A-Öa-ö 0-9.!?,-]+(?=<\/h1>)")
 PATTERN_BROAD_TEXT = re.compile(r"(?<=css-10r2ygq\">)[A-Öa-ö 0-9.!?,-]+(?=<)")
 PATTERN_LINK_TEXT = re.compile(r"(?<=>)[A-Öa-ö 0-9.!?,-]+(?=<\/a>)")
+
+
+
 

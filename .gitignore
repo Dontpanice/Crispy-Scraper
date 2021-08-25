@@ -131,3 +131,5 @@ dmypy.json
 *.iml
 Chrome-driver/chromedriver.exe
 Chrome-driver/chromedriver_win32.zip
+/venv2/
+/TestCase/

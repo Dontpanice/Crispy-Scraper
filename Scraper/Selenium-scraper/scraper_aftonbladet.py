@@ -20,3 +20,11 @@ print("\n searching...")
 # start collecting
 collector(driver)
 print("\n Finished")
+
+
+
+
+## TODO
+# Automatically click the "okej" button on driver startup
+# Fix collection of eleements when page is scrolling
+# Refactor

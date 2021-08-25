@@ -3,6 +3,7 @@ import re
 import time
 import pandas as pd
 
+
 def collect_data(source_page):
     title = re.findall(PATTERN_HEADLINE_TEXT, source_page)
 
@@ -73,14 +74,13 @@ def driver_search(driver, keywords="mord, göteborg", search_box_class_name="css
     time.sleep(1)
 
 
-
-def collect_page(driver, page_nr="0", max_elements=1):
+def collect_page(driver, page_nr="0", max_elements=1, class_name="css-1pslb2u"):
     titles = []
     texts = []
     for e in range(max_elements):
-        search_elements = driver.find_elements_by_class_name("css-1pslb2u")
+        search_elements = driver.find_elements_by_class_name(class_name)
         element_pick = search_elements[e]
-
+        scroll_to_element(driver, element_pick)
         element_pick.click()
         time.sleep(5)
         # print("\n SOURCE -->", driver.page_source)
@@ -98,7 +98,7 @@ def collect_page(driver, page_nr="0", max_elements=1):
 
 def collector(driver):
     try:
-        for page_nr in range (100):
+        for page_nr in range(100):
             print("\n collecting...")
             search_elements = driver.find_elements_by_class_name("css-1pslb2u")
             max_elements = len(search_elements)
@@ -107,3 +107,12 @@ def collector(driver):
             print("\n scrolling...")
     except RuntimeError:
         print("Oops!  Something went wrong.  Try again...")
+
+
+def scroll_to_element(driver, element):
+    # this scrolls until the element is in the middle of the page
+    desired_y = (element.size['height'] / 2) + element.location['y']
+    current_y = (driver.execute_script('return window.innerHeight') / 2) + driver.execute_script(
+        'return window.pageYOffset')
+    scroll_y_by = desired_y - current_y
+    driver.execute_script("window.scrollBy(0, arguments[0]);", scroll_y_by)

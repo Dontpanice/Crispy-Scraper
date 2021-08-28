@@ -7,21 +7,21 @@ from config import DRIVER_PATH
 from bs4 import BeautifulSoup
 import time
 import re
-from scraper_functions import collect_data, scroll_to_bottom, driver_search, scroll_once, collect_page, collector
+from scraper_functions import collect_data, scroll_to_bottom, driver_search, scroll_once, collect_page, collector, collect_elem_by_elem, collect_links
 import pandas as pd
 
 driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
 driver.get("https://www.aftonbladet.se/sok")
 
-# Do the search
+# Do the search mord, göteborg
 driver_search(driver, keywords="mord, göteborg", search_box_class_name="css-9rv3gz")
 print("\n searching...")
 
-# start collecting
-collector(driver)
-print("\n Finished")
-
-
+links = collect_links(driver, element_class="css-3ks4jq")
+print("finished")
+df = pd.DataFrame()
+df["links"] = links
+df.to_csv("links.csv")
 
 
 ## TODO

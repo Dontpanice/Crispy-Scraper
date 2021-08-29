@@ -23,7 +23,3 @@ size = {"height": 106}
 
 time.sleep(3)
 scroll_to_element(driver, loc, size)
-
-
-
-
